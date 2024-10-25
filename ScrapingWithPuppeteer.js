@@ -16,6 +16,7 @@ async function getTestData() {
       productTitle: "",
       oldPrice: "",
       newPrice: "",
+      discount: "",
     };
 
     // Extract image URLs
@@ -34,13 +35,17 @@ async function getTestData() {
       "#module_product_price_1 .pdp-mod-product-price .pdp-price_type_normal.pdp-price_color_orange.pdp-price_size_xl",
       (el) => el.textContent.trim()
     );
-    
+
     // Extract old price (discounted price)
     ProductInfo.oldPrice = await page
       .$eval(
         "#module_product_price_1 .origin-block .pdp-price_type_deleted.pdp-price_color_lightgray.pdp-price_size_xs",
         (el) => el.textContent.trim()
       )
+      .catch(() => "");
+    // Extract discounted %
+    ProductInfo.discount = await page
+      .$eval(".pdp-product-price__discount", (el) => el.textContent.trim())
       .catch(() => "");
     // // Extract product specifications
     // ProductInfo.specificationsKeys = await page.$$eval(".key-li", (specs) =>
