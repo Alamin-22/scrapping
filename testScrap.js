@@ -32,7 +32,10 @@ async function getTestData() {
     }
 
     // Extract new price (current price)
-    const newPriceElement = $(".pdp-price .pdp-price_type_normal notranslatepdp-price_color_orange pdp-price_size_xl");
+    const newPriceElement = $(
+      "#module_product_price_1 .pdp-mod-product-price .pdp-price_type_normal.pdp-price_color_orange.pdp-price_size_xl"
+    );
+    console.log("This is coming from Line 36:", newPriceElement.text());
     if (newPriceElement.length) {
       ProductInfo.newPrice = newPriceElement.text().trim();
     }
