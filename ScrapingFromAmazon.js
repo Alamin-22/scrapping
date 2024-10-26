@@ -89,13 +89,20 @@ async function getTestData() {
           const postedDate =
             review.querySelector("span.review-date")?.textContent.trim() || "";
 
+          const reviewedImages = Array.from(
+            review.querySelectorAll(
+              ".a-section.a-spacing-medium.review-image-container .review-image-tile-section .a-declarative a > img"
+            )
+          ).map((img) => img.src.trim());
+
           // Return an object containing all the extracted data
           return {
             profileName,
-            reviewTitle, // This will now target the actual review title text
+            reviewTitle,
             reviewDetails,
             rating,
             postedDate,
+            reviewedImages,
           };
         })
     );
