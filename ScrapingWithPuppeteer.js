@@ -49,10 +49,6 @@ async function getTestData() {
     ProductInfo.discount = await page
       .$eval(".pdp-product-price__discount", (el) => el.textContent.trim())
       .catch(() => "");
-    // // Extract product specifications
-    // ProductInfo.specificationsKeys = await page.$$eval(".key-li", (specs) =>
-    //   specs.map((spec) => spec.textContent.trim())
-    // );
 
     // this functino will save the retrieve data into a json file
     try {
