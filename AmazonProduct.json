@@ -8,7 +8,65 @@
     "https://m.media-amazon.com/images/I/517-bKsUoTL._SX38_SY50_CR,0,0,38,50_.jpg"
   ],
   "productTitle": "New Tv Gaming System | Wireless Console Retro Gaming Console |4K Ultra HD |Plug & Play Wireless TV Video Game System | 24,000+ Games | 10 Emulators | Dual-Player Setup | 2.4G Wireless Game Stick",
-  "oldPrice": "₹4,999",
-  "newPrice": "2,299",
-  "discount": "-54%"
+  "oldPrice": 4999,
+  "newPrice": 2299,
+  "discount": "-54%",
+  "Reviews": [
+    {
+      "profileName": "roohi z.",
+      "reviewTitle": "5.0 out of 5 stars",
+      "reviewDetails": "Super excited to have made this purchase. Massive nostalgic value.Joysticks are good quality, takes a bit of time to set up. I had trouble with the set up so I called the vendor and he was very supportive!I loved the overall purchase.",
+      "rating": 5,
+      "postedDate": "Reviewed in India on 20 October 2024"
+    },
+    {
+      "profileName": "Tina",
+      "reviewTitle": "1.0 out of 5 stars",
+      "reviewDetails": "Haven’t seen such cheap quality electronic product ever on Amazon. The console looks and feels like it is made from cheap polythene plastic. And there is no product manual or online support. Only saving grace is that this product is returnable and refundable.",
+      "rating": 1,
+      "postedDate": "Reviewed in India on 20 October 2024"
+    },
+    {
+      "profileName": "Pragi",
+      "reviewTitle": "5.0 out of 5 stars",
+      "reviewDetails": "This game is worth buying, my children liked it. I recommend it to anyone who is looking for a good games.",
+      "rating": 5,
+      "postedDate": "Reviewed in India on 22 October 2024"
+    },
+    {
+      "profileName": "Gupta",
+      "reviewTitle": "4.0 out of 5 stars",
+      "reviewDetails": "I like the product",
+      "rating": 4,
+      "postedDate": "Reviewed in India on 9 October 2024"
+    },
+    {
+      "profileName": "Vikas Srivastava",
+      "reviewTitle": "5.0 out of 5 stars",
+      "reviewDetails": "You can go for it,",
+      "rating": 5,
+      "postedDate": "Reviewed in India on 11 October 2024"
+    },
+    {
+      "profileName": "Pankaj kaushal",
+      "reviewTitle": "3.0 out of 5 stars",
+      "reviewDetails": "Game is good, but How to start to game, as wireless remotes are not working, how to connect remotes with games",
+      "rating": 3,
+      "postedDate": "Reviewed in India on 19 October 2024"
+    },
+    {
+      "profileName": "Saugata g.",
+      "reviewTitle": "1.0 out of 5 stars",
+      "reviewDetails": "After connecting it is not working. It is showing blue screen along with no signal. I returned the product and waiting for next lot. As my 6 years old son is very disappointed. Any idea why this has happend?",
+      "rating": 1,
+      "postedDate": "Reviewed in India on 22 October 2024"
+    },
+    {
+      "profileName": "Jay",
+      "reviewTitle": "5.0 out of 5 stars",
+      "reviewDetails": "Packaging is very good product,quality is very good , functionality properly , value for money",
+      "rating": 5,
+      "postedDate": "Reviewed in India on 12 October 2024"
+    }
+  ]
 }

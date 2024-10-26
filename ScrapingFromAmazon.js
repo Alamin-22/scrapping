@@ -18,6 +18,7 @@ async function getTestData() {
       oldPrice: "",
       newPrice: "",
       discount: "",
+      Reviews: [],
     };
 
     // Extract image URLs
@@ -34,16 +35,22 @@ async function getTestData() {
     // Extract new price (current price)
     ProductInfo.newPrice = await page.$eval(
       "#corePriceDisplay_desktop_feature_div > div.a-section.a-spacing-none.aok-align-center.aok-relative > span.a-price.aok-align-center.reinventPricePriceToPayMargin.priceToPay > span:nth-child(2) > span.a-price-whole",
-      (el) => el.textContent.trim()
+      (el) => {
+        const price = el.textContent.trim().replace(/[^0-9]/g, ""); // Remove non-numeric characters
+        return Number(price); // Convert to number
+      }
     );
 
-    //  Extract old price (discounted price)
+    // Extract old price (discounted price)
     ProductInfo.oldPrice = await page
       .$eval(
         "#corePriceDisplay_desktop_feature_div > div.a-section.a-spacing-small.aok-align-center > span > span.aok-relative > span.a-size-small.a-color-secondary.aok-align-center.basisPrice > span > span:nth-child(2)",
-        (el) => el.textContent.trim()
+        (el) => {
+          const price = el.textContent.trim().replace(/[^0-9]/g, ""); // Remove non-numeric characters
+          return Number(price); // Convert to number
+        }
       )
-      .catch(() => "");
+      .catch(() => 0); // Return 0 if old price is not found
 
     // Extract discounted %
     ProductInfo.discount = await page
@@ -52,6 +59,48 @@ async function getTestData() {
         (el) => el.textContent.trim()
       )
       .catch(() => "");
+
+    // For Retrieve Reviews.
+
+    ProductInfo.Reviews = await page.$$eval(
+      "#cm-cr-dp-review-list .a-section.review.aok-relative", // Target the review container
+      (reviews) =>
+        reviews.map((review) => {
+          // Extracting all relevant information
+          const profileName =
+            review
+              .querySelector("div.a-profile-content span.a-profile-name")
+              ?.textContent.trim() || "";
+          const reviewTitle =
+            review
+              .querySelector("a.review-title span") // Selector for review title text (updated)
+              ?.textContent.trim() || "";
+          const reviewDetails =
+            review
+              .querySelector(
+                "div.a-row.a-spacing-small.review-data > span > div > div.a-expander-content.reviewText.review-text-content.a-expander-partial-collapse-content > span"
+              )
+              ?.textContent.trim() || "";
+          const rating = Number(
+            review
+              .querySelector("i.review-rating span")
+              ?.textContent.match(/\d+/)?.[0] || ""
+          );
+          const postedDate =
+            review.querySelector("span.review-date")?.textContent.trim() || "";
+
+          // Return an object containing all the extracted data
+          return {
+            profileName,
+            reviewTitle, // This will now target the actual review title text
+            reviewDetails,
+            rating,
+            postedDate,
+          };
+        })
+    );
+
+    console.log(ProductInfo.Reviews);
 
     // this functino will save the retrieve data into a json file
     try {
