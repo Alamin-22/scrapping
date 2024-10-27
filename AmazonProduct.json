@@ -37,11 +37,19 @@
       "reviewedImages": []
     },
     {
-      "profileName": "Gupta",
+      "profileName": "Suraj Agrawal",
       "reviewTitle": "4.0 out of 5 stars",
-      "reviewDetails": "I like the product",
+      "reviewDetails": "Value for money-4/5It is good but the range is short to moderate. Control is good games are nice. But at times the buttons don't respond.",
       "rating": 4,
-      "postedDate": "Reviewed in India on 9 October 2024",
+      "postedDate": "Reviewed in India on 24 October 2024",
+      "reviewedImages": []
+    },
+    {
+      "profileName": "pawan",
+      "reviewTitle": "2.0 out of 5 stars",
+      "reviewDetails": "The hardware quality of the product is good, but user interface with software is very baad , game resolution quality is very poor",
+      "rating": 2,
+      "postedDate": "Reviewed in India on 25 October 2024",
       "reviewedImages": []
     },
     {
@@ -52,16 +60,6 @@
       "postedDate": "Reviewed in India on 11 October 2024",
       "reviewedImages": [
         "https://images-na.ssl-images-amazon.com/images/G/01/x-locale/common/grey-pixel.gif",
-        "https://images-na.ssl-images-amazon.com/images/G/01/x-locale/common/grey-pixel.gif"
-      ]
-    },
-    {
-      "profileName": "Pankaj kaushal",
-      "reviewTitle": "3.0 out of 5 stars",
-      "reviewDetails": "Game is good, but How to start to game, as wireless remotes are not working, how to connect remotes with games",
-      "rating": 3,
-      "postedDate": "Reviewed in India on 19 October 2024",
-      "reviewedImages": [
         "https://images-na.ssl-images-amazon.com/images/G/01/x-locale/common/grey-pixel.gif"
       ]
     },
