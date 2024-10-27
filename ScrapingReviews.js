@@ -16,24 +16,35 @@ async function getTestData() {
       (reviewElements) =>
         reviewElements.map((review) => {
           // Extracting the profile name
+          const AuthorImg =
+            review.querySelector(".lDY1rd")?.getAttribute("src") || "";
+          // Extracting the profile name
           const profileName =
             review.querySelector(".jxjCjc .TSUbDb > a")?.textContent.trim() ||
             "";
+          // Extracting the profile name
+          const postedTime =
+            review
+              .querySelector(
+                "div > div.jxjCjc > div.gQfZge > div > div > div.PuaHbe > span.dehysf.lTi8oc"
+              )
+              ?.textContent.trim() || "";
 
-          // Extracting the rating (e.g., "Rated 5.0 out of 5")
-          const ratingText =
-            review.querySelector(
-              ".Puahb span.TiI8oc.Z3HNkc[aria-label^='Rated']"
-            )?.ariaLabel || "";
-          const rating = ratingText.match(/Rated (\d+(\.\d+)?) out of 5/)?.[1];
-
-          // Extracting the review text
+          // // Extracting the rating (e.g., "Rated 5.0 out of 5")
+          // const ratingText =
+          //   review.querySelector(
+          //     "div.jxjCjc > div.gQfZge > div > div > div.PuaHbe > span.lTi8oc.z3HNkc > div > span"
+          //   )?.ariaLabel || ""; // aria-label contains the rating info
+          // const rating = ratingText.match(/Rated (\d+(\.\d+)?) out of 5/)?.[1];
+          // // Extracting the review text
           const reviewText =
             review.querySelector(".review-full-text")?.textContent.trim() || "";
 
           return {
+            AuthorImg,
             profileName,
-            rating: rating ? parseFloat(rating) : null,
+            postedTime,
+            // rating: rating ? parseFloat(rating) : null,
             reviewText,
           };
         })
