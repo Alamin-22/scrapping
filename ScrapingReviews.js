@@ -66,6 +66,12 @@ async function getAllReviews(page) {
         // Extracting the review text
         const reviewText =
           review.querySelector(".review-full-text")?.textContent.trim() || "";
+        const reviewText2 =
+          review
+            .querySelector(
+              "#reviewSort > div > div.gws-localreviews__general-reviews-block > div > div.jxjCjc > div.gQfZge > div > div > div.Jtu6Td > span > span"
+            )
+            ?.textContent.trim() || "";
 
         return {
           AuthorImg,
@@ -74,6 +80,7 @@ async function getAllReviews(page) {
           imageUrls,
           rating,
           reviewText,
+          reviewText2
         };
       })
   );
@@ -97,7 +104,7 @@ async function getTestData() {
     // Save the retrieved data to a JSON file
     try {
       fs.writeFileSync(
-        "RumaNailsAllReviews.json",
+        "Reviews2.json",
         JSON.stringify(reviews, null, 2),
         "utf-8"
       );
