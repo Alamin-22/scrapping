@@ -66,7 +66,7 @@ async function getTestData() {
     // Save the retrieved data to a JSON file
     try {
       fs.writeFileSync(
-        "RumaNailsGoogleReviews.json",
+        "RumaNailsAllReviews.json",
         JSON.stringify(reviews, null, 2),
         "utf-8"
       );
