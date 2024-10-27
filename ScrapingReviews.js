@@ -2,7 +2,7 @@ const puppeteer = require("puppeteer");
 const fs = require("fs");
 
 const Url =
-  "https://www.google.com/search?q=ruma+nails+%26+spa&oq=ruma+nails+%26+spa&gs_lcrp=EgZjaHJvbWUqDAgAECMYJxiABBiKBTIMCAAQIxgnGIAEGIoFMg0IARAuGK8BGMcBGIAEMggIAhBFGCcYOzIHCAMQABiABDIGCAQQRRg9MgYIBRBFGD0yBggGEEUYPTIGCAcQRRhB0gEIODk5OGowajeoAgiwAgE&sourceid=chrome&ie=UTF-8#lrd=0x89c25d7e7c1e16c5:0xcce7df910fd64046,1,,,,";
+  "https://www.google.com/search?q=ruma+nails+%26+spa&oq=ruma+nails+%26+spa&gs_lcrp=EgZjaHJvbWUqDAgAECMYJxiABBiKBTIMCAAQIxgnGIAEGIoFMg0IARAuGK8BGMcBGIAEMggIAhBFGCcYOzIHCAMQABiABDIGCAQQRRg9MgYIBRBFGD0yBggGEEUYPTIGCAcQRRhB0gEIMjAyMGowajeoAgiwAgE&sourceid=chrome&ie=UTF-8#lrd=0x89c25d7e7c1e16c5:0xcce7df910fd64046,1,,,,";
 
 async function getTestData() {
   const browser = await puppeteer.launch({ headless: true });
@@ -29,14 +29,21 @@ async function getTestData() {
                 "div > div.jxjCjc > div.gQfZge > div > div > div.PuaHbe > span.dehysf.lTi8oc"
               )
               ?.textContent.trim() || "";
+          // for retrieve Reviewed Images
+          // Extract multiple reviewed images (background images from divs)
+          const imageElements = review.querySelectorAll("div.JrO5Xe");
+          const imageUrls = Array.from(imageElements).map((imgDiv) => {
+            const bgImage = imgDiv.style.backgroundImage || "";
+            return bgImage.match(/url\("(.*?)"\)/)?.[1] || ""; // Extract the URL from the 'background-image'
+          });
 
-          // // Extracting the rating (e.g., "Rated 5.0 out of 5")
-          // const ratingText =
-          //   review.querySelector(
-          //     "div.jxjCjc > div.gQfZge > div > div > div.PuaHbe > span.lTi8oc.z3HNkc > div > span"
-          //   )?.ariaLabel || ""; // aria-label contains the rating info
-          // const rating = ratingText.match(/Rated (\d+(\.\d+)?) out of 5/)?.[1];
-          // // Extracting the review text
+          // Extracting the rating (e.g., "Rated 5.0 out of 5")
+          const ratingText =
+            review.querySelector(
+              "div.jxjCjc > div.gQfZge > div > div > div.PuaHbe > span.lTi8oc.z3HNkc"
+            )?.ariaLabel || ""; // aria-label contains the rating info
+          const rating = ratingText.match(/Rated (\d+(\.\d+)?) out of 5/)?.[1];
+          // Extracting the review text
           const reviewText =
             review.querySelector(".review-full-text")?.textContent.trim() || "";
 
@@ -44,6 +51,8 @@ async function getTestData() {
             AuthorImg,
             profileName,
             postedTime,
+            imageUrls,
+            rating,
             // rating: rating ? parseFloat(rating) : null,
             reviewText,
           };
@@ -55,7 +64,7 @@ async function getTestData() {
     // Save the retrieved data to a JSON file
     try {
       fs.writeFileSync(
-        "GoogleReviews.json",
+        "RumaNailsGoogleReviews.json",
         JSON.stringify(reviews, null, 2),
         "utf-8"
       );
