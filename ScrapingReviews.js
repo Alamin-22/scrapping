@@ -29,20 +29,22 @@ async function getTestData() {
                 "div > div.jxjCjc > div.gQfZge > div > div > div.PuaHbe > span.dehysf.lTi8oc"
               )
               ?.textContent.trim() || "";
+
           // for retrieve Reviewed Images
-          // Extract multiple reviewed images (background images from divs)
           const imageElements = review.querySelectorAll("div.JrO5Xe");
           const imageUrls = Array.from(imageElements).map((imgDiv) => {
             const bgImage = imgDiv.style.backgroundImage || "";
             return bgImage.match(/url\("(.*?)"\)/)?.[1] || ""; // Extract the URL from the 'background-image'
           });
 
-          // Extracting the rating (e.g., "Rated 5.0 out of 5")
+          // Extracting the rating
           const ratingText =
             review.querySelector(
               "div.jxjCjc > div.gQfZge > div > div > div.PuaHbe > span.lTi8oc.z3HNkc"
             )?.ariaLabel || ""; // aria-label contains the rating info
-          const rating = ratingText.match(/Rated (\d+(\.\d+)?) out of 5/)?.[1];
+          const rating = Number(
+            ratingText.match(/Rated (\d+(\.\d+)?) out of 5/)?.[1]
+          );
           // Extracting the review text
           const reviewText =
             review.querySelector(".review-full-text")?.textContent.trim() || "";
