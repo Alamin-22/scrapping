@@ -35,6 +35,10 @@ async function getAllReviews(page) {
         const AuthorName =
           review.querySelector(".jxjCjc .TSUbDb > a")?.textContent.trim() || "";
 
+        const officialReviewLink =
+          review.querySelector(".jxjCjc .TSUbDb > a")?.getAttribute("href") ||
+          "";
+
         const postedTime =
           review
             .querySelector(
@@ -171,15 +175,17 @@ async function getAllReviews(page) {
         }
 
         // Randomly assign one of the  icons
-        let FirstId = 1;
         const providedBy = getRandomIcon();
 
-        // Only return the review if not all of imageUrls, reviewText, and reviewText2 are empty
-        if (!(imageUrls.length === 0 && !reviewText && !reviewText2)) {
+        // Only return the review if not all of imageUrls, reviewText, and reviewText2 are empty and if rating is above 2
+        if (
+          !(imageUrls.length === 0 && !reviewText && !reviewText2) &&
+          rating > 2
+        ) {
           return {
-            id: FirstId + 1,
             AuthorImg,
             AuthorName,
+            officialReviewLink,
             postedTime,
             imageUrls,
             rating,
