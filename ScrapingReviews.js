@@ -46,10 +46,33 @@ async function getAllReviews(page) {
             )
             ?.textContent.trim() || "";
 
+        // empty array to store data
+        const galleryData = [];
+
+        // Retrieve ImgGalleryLink
+        const imageLinkElements = review.querySelectorAll(
+          "div.acCJ4b > div > div > a"
+        );
+
+        // Retrieve the images
         const imageElements = review.querySelectorAll("div.JrO5Xe");
-        const imageUrls = Array.from(imageElements).map((imgDiv) => {
-          const bgImage = imgDiv.style.backgroundImage || "";
-          return bgImage.match(/url\("(.*?)"\)/)?.[1] || "";
+
+        //  Combine ImgGalleryLink and Image into objects and store them in the array
+        Array.from(imageLinkElements).forEach((linkEl, index) => {
+          const ImgGalleryLink = linkEl.getAttribute("href") || "";
+
+          // Safely check if a corresponding image element exists
+          if (imageElements[index]) {
+            const imgDiv = imageElements[index];
+            const bgImage = imgDiv.style.backgroundImage || "";
+            const imageUrl = bgImage.match(/url\("(.*?)"\)/)?.[1] || "";
+
+            // Push the object with both ImgGalleryLink and imageUrl into the array
+            galleryData.push({
+              ImgGalleryLink,
+              imageUrl,
+            });
+          }
         });
 
         const ratingText =
@@ -179,7 +202,7 @@ async function getAllReviews(page) {
 
         // Only return the review if not all of imageUrls, reviewText, and reviewText2 are empty and if rating is above 2
         if (
-          !(imageUrls.length === 0 && !reviewText && !reviewText2) &&
+          !(galleryData.length === 0 && !reviewText && !reviewText2) &&
           rating > 2
         ) {
           return {
@@ -187,7 +210,7 @@ async function getAllReviews(page) {
             AuthorName,
             officialReviewLink,
             postedTime,
-            imageUrls,
+            galleryData,
             rating,
             reviewText,
             reviewText2,
